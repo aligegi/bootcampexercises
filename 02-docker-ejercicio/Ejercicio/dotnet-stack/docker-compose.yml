@@ -1,0 +1,44 @@
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: some-mongo
+    networks:
+      - lemoncode-challenge
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  backend:
+    build: ./backend  
+    container_name: topics-api  
+    networks:
+      - lemoncode-challenge
+    environment:
+      - ASPNETCORE_HTTP_PORTS=5000  
+
+    depends_on:
+      - mongo
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build: ./frontend
+    container_name: lemoncode-frontend
+    networks:
+      - lemoncode-challenge
+    environment:
+      - API_URI=http://topics-api:5000/api/topics 
+    depends_on:
+      - backend
+    ports:
+      - "8080:8080"
+
+networks:
+  lemoncode-challenge:
+    name: lemoncode-challenge
+
+
+volumes:
+  mongo-data:
