@@ -12,7 +12,15 @@ El frontend responde en `/` y la API responde en `/api`.
 
 ---
 
-### 📁 Archivos incluidos
+## 📁 Estructura del proyecto
+
+```
+├── 02-distributed/
+    ├── ingress.yaml  
+    ├── todo-api-deploy.yaml
+    ├── todo-front-deploy.yaml
+    └── README.md
+```
 
 * `todo-api-deploym.yaml` // Contiene el Configmap, el Deployment y el Service para el backend
 * `todo-front-deploy.yaml`// Contiene el Deployment y el Service para el frontend
