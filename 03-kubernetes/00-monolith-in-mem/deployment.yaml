@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-monolith
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-monolith
+  template:
+    metadata:
+      labels:
+        app: todo-monolith
+    spec:
+      containers:
+        - name: todo-monolith
+          image: lemoncodersbc/lc-todo-monolith:v5-2024
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3000"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-monolith-service
+spec:
+  type: LoadBalancer  # En Minikube, será NodePort
+  selector:
+    app: todo-monolith
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

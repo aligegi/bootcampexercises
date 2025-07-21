@@ -1,0 +1,46 @@
+# Deployment para todo-front
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-front
+  labels:
+    app: todo-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-front
+  template:
+    metadata:
+      labels:
+        app: todo-front
+    spec:
+      containers:
+      - name: todo-front
+        image: lemoncodersbc/lc-todo-front:v5-2024
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+
+---
+# Service ClusterIP para todo-front
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-front-service
+  labels:
+    app: todo-front
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: todo-front

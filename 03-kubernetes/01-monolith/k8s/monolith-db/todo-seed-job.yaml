@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: todo-db-seed-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: seed
+        image: postgres:13   # Usa la versión que tengas en tu BBDD
+        command: ["psql"]
+        args:
+          - "-h"
+          - "todo-db-service"    # El nombre del servicio de la BBDD
+          - "-U"
+          - "postgres"           # Usuario (puedes cambiarlo según config)
+          - "-d"
+          - "todos_db"           # Nombre de la base de datos
+          - "-f"
+          - "/seed/todo-seed.sql"
+        env:
+          - name: PGPASSWORD
+            value: "postgres"    # Cambia según tu contraseña real
+        volumeMounts:
+          - name: seed-sql
+            mountPath: /seed
+      restartPolicy: OnFailure
+      volumes:
+        - name: seed-sql
+          configMap:
+            name: todo-seed-sql
+  backoffLimit: 3

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-seed-sql
+data:
+  todo-seed.sql: |
+    -- Aquí va tu script SQL para hacer seed de la BBDD
+    INSERT INTO todos (id, title, completed, due_date, "order") VALUES
+      (100, 'Seed task 1', false, '2025-07-14 10:00:00', 1),
+      (101, 'Seed task 2', true, '2025-07-15 10:00:00', 2);
