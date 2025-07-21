@@ -1,4 +1,4 @@
-# 🐘 Ejercicio 2 – Monolito con base de datos PostgreSQL
+# Ejercicio 2 – Monolito con base de datos PostgreSQL
 
 Este ejercicio despliega una aplicación TODO monolítica dividida en dos componentes:
 
@@ -10,22 +10,23 @@ Este ejercicio despliega una aplicación TODO monolítica dividida en dos compon
 ## 📁 Estructura del proyecto
 
 ```
-project-root/
-│
-├── 01-monolith-db/         # Archivos relacionados con la base de datos
-│   ├── configmap-db.yaml
-│   ├── statefulset-db.yaml
-│   ├── persistentvolume.yaml
-│   ├── persistentvolumeclaim.yaml
-│   ├── service-db.yaml
-│   ├── storageclass.yaml
-│   ├── seed-job.yaml
-│   └── configmap-seed.yaml
-│
-├── 02-monolith-app/        # Archivos relacionados con la app Node.js
-│   ├── deployment-app.yaml
-│   ├── configmap-app.yaml
-│   └── service-app.yaml
+01-monolith/
+├── k8s/
+│   ├── monolith-db/         # Archivos relacionados con la base de datos
+│   │   ├── configmap-db.yaml
+│   │   ├── statefulset-db.yaml
+│   │   ├── persistentvolume.yaml
+│   │   ├── persistentvolumeclaim.yaml
+│   │   ├── service-db.yaml
+│   │   ├── storageclass.yaml
+│   │   ├── todo-seed-job.yaml
+│   │   └── todo-seed-configmap.yaml
+│   │
+│   └──  monolith-app/        # Archivos relacionados con la app Node.js
+│       ├── deployment-app.yaml
+│       ├── configmap-app.yaml
+│       └── service-app.yaml
+└── README.md
 ```
 
 ---
@@ -35,7 +36,7 @@ project-root/
 ### Paso 1 – Desplegar la base de datos PostgreSQL
 
 ```bash
-kubectl apply -f 01-monolith-db/
+kubectl apply -f monolith-db/
 ```
 
 Esto crea:
@@ -49,7 +50,7 @@ El script SQL vive dentro del `ConfigMap` y es montado por el Job mediante un vo
 ### Paso 2 – Desplegar la aplicación `todo-app`
 
 ```bash
-kubectl apply -f 02-monolith-app/
+kubectl apply -f monolith-app/
 ```
 
 Esto crea:
