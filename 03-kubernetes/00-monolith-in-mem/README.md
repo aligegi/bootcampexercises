@@ -7,8 +7,8 @@ Este proyecto despliega una aplicación TODO en memoria dentro de un clúster de
 
 .
 ├── 00-monolith-in-mem/
-│   └── deployment.yaml
-└── README.md
+    └── deployment.yaml
+    └── README.md
 
 
 ## Descripción de los recursos
@@ -38,7 +38,7 @@ kubectl apply -f 00-monolith-in-mem/deployment.yaml
 kubectl get pods
 ```
 
-Debes ver un pod llamado `todo-monolith-...` con estado `Running`.
+Debe haber un pod llamado `todo-monolith-...` con estado `Running`.
 
 4. **Acceder a la aplicación desde el navegador:**
 
