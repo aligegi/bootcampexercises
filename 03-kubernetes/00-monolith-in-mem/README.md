@@ -1,15 +1,15 @@
-# Todo App – Monolito en memoria
+# Ejercicio 1 - Monolito en memoria
 
 Este proyecto despliega una aplicación TODO en memoria dentro de un clúster de Kubernetes local, utilizando Minikube.
 
 
-## Estructura del repositorio
+## 📁 Estructura del proyecto
 
-.
+```
 ├── 00-monolith-in-mem/
     └── deployment.yaml
     └── README.md
-
+```
 
 ## Descripción de los recursos
 
