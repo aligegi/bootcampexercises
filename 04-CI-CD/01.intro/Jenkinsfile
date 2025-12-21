@@ -8,13 +8,15 @@ pipeline {
     stages {
         stage('stage-1') {
             steps {
-                echo "This is the build number $BUILD_NUMBER of demo $DEMO"
-                sh '''
-                   echo "Using a multi-line shell step"
-                   chmod +x test.sh
-                   ./test.sh
-                '''
-            }
+                dir('01-intro/1.1') {
+                    echo "This is the build number $BUILD_NUMBER of demo $DEMO"
+                    sh '''
+                       echo "Using a multi-line shell step"
+                       chmod +x test.sh
+                       ./test.sh
+                    '''
+                }
+            }   
         }
     }
 }
