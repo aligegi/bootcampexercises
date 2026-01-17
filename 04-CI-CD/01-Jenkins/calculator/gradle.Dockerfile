@@ -6,13 +6,13 @@ USER root
 RUN apt update
 
 # Gradle version
-ARG GRADLE_VERSION=8.5
+ARG GRADLE_VERSION=6.6.1
 
 # Define the URL where gradle can be downloaded
 ARG GRADLE_BASE_URL=https://services.gradle.org/distributions
 
 # Define the SHA key to validate the gradle download
-ARG GRADLE_SHA=9d926787066a081739e8200858338b4a69e837c3a821a33aca9db09dd4a41026
+ARG GRADLE_SHA=7873ed5287f47ca03549ab8dcb6dc877ac7f0e3d7b1eb12685161d10080910ac
 
 # Create the directories, download gradle, validate the download
 # install it remove download file and set links
@@ -25,6 +25,6 @@ RUN mkdir -p /usr/share/gradle /usr/share/gradle/ref \
   && echo "Clenaing and setting links" && rm -f /tmp/gradle.zip \
   && ln -s /usr/share/gradle/gradle-${GRADLE_VERSION} /usr/bin/gradle
 
-ENV GRADLE_VERSION 8.5
+ENV GRADLE_VERSION 6.6.1
 ENV GRADLE_HOME /usr/bin/gradle
 ENV PATH $PATH:$GRADLE_HOME/bin
