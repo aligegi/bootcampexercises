@@ -1,0 +1,36 @@
+pipeline {
+    agent {
+        docker {
+            image 'gradle:6.6.1-jre14-openj9'
+            args '-v gradle-cache:/home/gradle/.gradle'
+        }
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Code checked out from repository'
+            }
+        }
+        stage('Compile') {
+            steps {
+                dir('04-CI-CD/01-Jenkins/calculator') {
+                    sh 'gradle compileJava'
+                }
+            }
+        }
+        stage('Unit Tests') {
+            steps {
+                dir('04-CI-CD/01-Jenkins/calculator') {
+                    sh 'gradle test'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            dir('04-CI-CD/01-Jenkins/calculator') {
+                junit 'build/test-results/test/*.xml'
+            }
+        }
+    }
+}
